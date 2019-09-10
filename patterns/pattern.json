@@ -1,0 +1,19 @@
+{
+    "name": "US Open 40ft 2012",
+    "oilPerBoard": "40 uL",
+    "forward": [
+        { "start": "2L", "stop": "2R", "loads": "4", "speed": "14", "startf": "0.0", "end": "5.9" },
+        { "start": "2L", "stop": "2R", "loads": "3", "speed": "18", "startf": "5.9", "end": "13.5" },
+        { "start": "2L", "stop": "2R", "loads": "3", "speed": "18", "startf": "13.5", "end": "21.1" },
+        { "start": "2L", "stop": "2R", "loads": "2", "speed": "18", "startf": "21.1", "end": "26.2" },
+        { "start": "4L", "stop": "4R", "loads": "2", "speed": "22", "startf": "26.2", "end": "32.4" },
+        { "start": "4L", "stop": "4R", "loads": "1", "speed": "26", "startf": "32.4", "end": "36.0" },
+        { "start": "2L", "stop": "2R", "loads": "0", "speed": "26", "startf": "36", "end": "40.0" }
+    ],
+    "reverse": [
+        { "start": "2L", "stop": "2R", "loads": "0", "speed": "26", "startf": "40.0", "end": "28.0" },
+        { "start": "3L", "stop": "3R", "loads": "2", "speed": "22", "startf": "28.0", "end": "21.8" },
+        { "start": "3L", "stop": "3R", "loads": "2", "speed": "22", "startf": "21.8", "end": "15.6" },
+        { "start": "2L", "stop": "2R", "loads": "0", "speed": "18", "startf": "15.6", "end": "0.0" }
+    ]
+}

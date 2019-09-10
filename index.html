@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="static/styles/main.css">
+
+  <title>Oil Pattern</title>
+</head>
+
+<body onload="buildPattern()">
+  <div class="root-div">
+    <div class="header">
+      <h1 id="pattern-name">Players House Shot</h1>
+      <!-- <span id="version-label">v19</span> -->
+      <!-- <div class="logo"></div>
+        <img class="" src="imgs/pnslogo.png" alt="Players & Spectators II">
+      </div> -->
+    </div>
+
+    <hr>
+    <div class="">
+      <div class="text-left head-block">
+        Oil Pattern Distance: <span><strong id="oil-pattern-distance" class="head-value">42 Feet</strong></span>
+      </div>
+      <div class="text-center head-block">
+        Reverse Brush Drop: <span id="reverse-brush-drop" class="head-value">42 Feet</span>
+      </div>
+      <div class="text-right head-block">
+        Oil Per Board: <span class="head-value"><strong id="oil-per-board">50 uL</strong></span>
+      </div>
+    </div>
+
+    <div class="">
+      <div class="text-left head-block">
+        Forward Oil Total: <span id="forward-oil-total" class="head-value">42 Feet</span>
+      </div>
+      <div class="text-center head-block">
+        Reverse Oil Total: <span id="reverse-oil-total" class="head-value">42 Feet</span>
+      </div>
+      <div class="text-right head-block">
+        Volume Oil Total: <span id="volume-oil-total" class="head-value">42 Feet</span>
+      </div>
+    </div>
+
+    <div class="">
+      <div class="text-left head-block">
+        Forward Boards Crossed: <span id="forward-boards-crossed" class="head-value">42 Feet</span>
+      </div>
+      <div class="text-center head-block">
+        Reverse Boards Crossed: <span id="reverse-boards-crossed" class="head-value">42 Feet</span>
+      </div>
+      <div class="text-right head-block">
+        Total Boards Crossed: <span id="total-boards-crossed" class="head-value">42 Feet</span>
+      </div>
+    </div>
+    <hr>
+
+    <!-- tables, colours, pattern -->
+    <div class="pattern-data">
+      <div class="pattern-passes">
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th scope="col"><strong>F</strong></th>
+              <th scope="col">Start</th>
+              <th scope="col">Stop</th>
+              <th scope="col">Loads</th>
+              <th scope="col">Speed</th>
+              <th scope="col">Boards</th>
+              <th scope="col">Start</th>
+              <th scope="col">End</th>
+              <th scope="col">Feet</th>
+              <th scope="col">T.Oil</th>
+            </tr>
+          </thead>
+          <tbody id="forward-body">
+          </tbody>
+        </table>
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th scope="col"><strong>R</strong></th>
+              <th scope="col">Start</th>
+              <th scope="col">Stop</th>
+              <th scope="col">Loads</th>
+              <th scope="col">Speed</th>
+              <th scope="col">Boards</th>
+              <th scope="col">Start</th>
+              <th scope="col">End</th>
+              <th scope="col">Feet</th>
+              <th scope="col">T.Oil</th>
+            </tr>
+          </thead>
+          <tbody id="reverse-body">
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pattern-colors">
+        Forward
+        <br>
+        <div class="color-section forward"></div>
+        Reverse
+        <br>
+        <div class="color-section reverse"></div>
+        Combined
+        <br>
+        <div class="color-section combined"></div>
+        Buff
+        <br>
+        <div class="color-section buff"></div>
+      </div>
+
+      <div class="pattern-graphs">
+        <div style="text-align: right;">
+          <table class="">
+            <tbody id="pattern-body">
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script>
+    var startingColor = getRGB("rgb(88, 175, 218)"); //same as buff color in css
+    var targetColor = getRGB("rgb(255, 255, 255)"); //white for now
+    var colorStep = calculateColorStep(52);
+
+    function buildPattern() {
+      var pattern = {
+        "name": "Players House Shot",
+        "oilPerBoard": "38 uL",
+        "forward": [
+          { "start": "2L", "stop": "2R", "loads": "2", "speed": "10", "startf": "0.0", "end": "1.0" },
+          { "start": "8L", "stop": "8R", "loads": "1", "speed": "14", "startf": "1.0", "end": "3.0" },
+          { "start": "8L", "stop": "8R", "loads": "1", "speed": "14", "startf": "3.0", "end": "5.0" },
+          { "start": "9L", "stop": "9R", "loads": "2", "speed": "18", "startf": "5.0", "end": "10.0" },
+          { "start": "10L", "stop": "10R", "loads": "3", "speed": "18", "startf": "10.0", "end": "17.0" },
+          { "start": "11L", "stop": "11R", "loads": "1", "speed": "18", "startf": "17.0", "end": "20.0" },
+          { "start": "12", "stop": "12R", "loads": "1", "speed": "18", "startf": "20.0", "end": "22.0" },
+          { "start": "13", "stop": "13R", "loads": "1", "speed": "18", "startf": "22.0", "end": "25.0" },
+          { "start": "2L", "stop": "2R", "loads": "0", "speed": "22", "startf": "25.0", "end": "41.0" }
+        ],
+        "reverse": [
+          { "start": "2L", "stop": "2R", "loads": "0", "speed": "30", "startf": "41.0", "end": "33.0" },
+          { "start": "12L", "stop": "12R", "loads": "1", "speed": "18", "startf": "33.0", "end": "30.0" },
+          { "start": "11L", "stop": "11R", "loads": "2", "speed": "18", "startf": "30.0", "end": "25.0" },
+          { "start": "10L", "stop": "10R", "loads": "1", "speed": "18", "startf": "25.0", "end": "22.0" },
+          { "start": "10L", "stop": "10R", "loads": "4", "speed": "14", "startf": "22.0", "end": "15.0" },
+          { "start": "9L", "stop": "9R", "loads": "2", "speed": "14", "startf": "15.0", "end": "11.0" },
+          { "start": "8L", "stop": "8R", "loads": "2", "speed": "10", "startf": "11.0", "end": "8.0" },
+          { "start": "8L", "stop": "8R", "loads": "1", "speed": "10", "startf": "8.0", "end": "6.0" },
+          { "start": "8L", "stop": "8R", "loads": "0", "speed": "10", "startf": "6.0", "end": "0.0" }
+        ]
+      };
+
+      var $patternBody = $("#pattern-body");
+
+      for (i = 0; i < 60; i++) {
+        $patternBody.append("<tr footage=" + (59 - i) + " class=\"lane-foot\"></tr>");
+      }
+
+      $("tr.lane-foot").each(function (index, element) {
+        for (i = 0; i < 39; i++) {
+          $(this).append("<td posy=" + (59 - index) + " posx=" + i + " gradient=-1" + " class=\"board\"></td>");
+        }
+      });
+
+      var $forwardBody = $("#forward-body");
+      var $reverseBody = $("#reverse-body");
+      var $rows = $($("tr.lane-foot").get().reverse());
+      var $addedRow = null;
+
+      var forwardTotalBoards = 0;
+      var reverseTotalBoards = 0;
+      var oilPerBoard = parseInt(pattern.oilPerBoard);
+      var patternLength = parseInt(pattern.reverse[0].startf);
+
+      var xstart = 0;
+      var xend = 0;
+      var ystart = 0;
+      var yend = 0;
+      var loads = 0;
+      var crossed = 0;
+
+      for (p = 0; p < pattern.forward.length; p++) {
+        xstart = parseInt(pattern.forward[p].start) - 1;
+        xend = 39 - parseInt(pattern.forward[p].stop);
+        loads = parseInt(pattern.forward[p].loads);
+        ystart = Math.floor(parseFloat(pattern.forward[p].startf));
+        yend = Math.floor(parseFloat(pattern.forward[p].end));
+
+        crossed = (xend + 1 - xstart) * loads;
+        forwardTotalBoards += crossed;
+
+        $addedRow = $("<tr></tr>").appendTo($forwardBody);
+        $addedRow.append("<th scope=\"row\">" + (p + 1) + "</th>");
+        $addedRow.append("<td>" + pattern.forward[p].start + "</td>");
+        $addedRow.append("<td>" + pattern.forward[p].stop + "</td>");
+        $addedRow.append("<td>" + pattern.forward[p].loads + "</td>");
+        $addedRow.append("<td>" + pattern.forward[p].speed + "</td>");
+        $addedRow.append("<td>" + crossed + "</td>");
+        $addedRow.append("<td>" + pattern.forward[p].startf + "</td>");
+        $addedRow.append("<td>" + pattern.forward[p].end + "</td>");
+        $addedRow.append("<td>" + (parseFloat(pattern.forward[p].end) - parseFloat(pattern.forward[p].startf)).toFixed(1) + "</td>");
+        $addedRow.append("<td>" + (oilPerBoard * crossed) + "</td>");
+
+        for (i = ystart; i < yend; i++) {
+          var $row = $rows.eq(i);
+          $row.children().each(function (x, element) {
+            var posx = parseInt(element.getAttribute("posx"));
+            if ((posx >= xstart && posx <= xend) && loads > 0) {
+              element.className += " forward";
+            }
+          });
+        }
+      }
+
+      for (p = 0; p < pattern.reverse.length; p++) {
+        xstart = parseInt(pattern.reverse[p].start) - 1;
+        xend = 39 - parseInt(pattern.reverse[p].stop);
+        loads = parseInt(pattern.reverse[p].loads);
+        ystart = Math.floor(parseFloat(pattern.reverse[p].startf));
+        yend = Math.floor(parseFloat(pattern.reverse[p].end));
+
+        crossed = (xend + 1 - xstart) * loads;
+        reverseTotalBoards += crossed;
+
+        $addedRow = $("<tr></tr>").appendTo($reverseBody);
+        $addedRow.append("<th scope=\"row\">" + (p + 1) + "</th>");
+        $addedRow.append("<td>" + pattern.reverse[p].start + "</td>");
+        $addedRow.append("<td>" + pattern.reverse[p].stop + "</td>");
+        $addedRow.append("<td>" + pattern.reverse[p].loads + "</td>");
+        $addedRow.append("<td>" + pattern.reverse[p].speed + "</td>");
+        $addedRow.append("<td>" + crossed + "</td>");
+        $addedRow.append("<td>" + pattern.reverse[p].startf + "</td>");
+        $addedRow.append("<td>" + pattern.reverse[p].end + "</td>");
+        $addedRow.append("<td>" + (parseFloat(pattern.reverse[p].end) - parseFloat(pattern.reverse[p].startf)).toFixed(1) + "</td>");
+        $addedRow.append("<td>" + (oilPerBoard * crossed) + "</td>");
+
+        for (i = ystart; i >= yend; i--) {
+          var $row = $rows.eq(i);
+          $row.children().each(function (x, element) {
+            var posx = parseInt(element.getAttribute("posx"));
+            if ((posx >= xstart && posx <= xend) && (loads > 0 || p == pattern.reverse.length - 1)) {
+              element.className += " reverse";
+            }
+          });
+        }
+      }
+
+      //buff pass
+      for (i = 0; i < patternLength; i++) {
+        if (i > 0) {
+          var $previousRow = $rows.eq(i - 1);
+        }
+
+        var $row = $rows.eq(i);
+        $row.children().each(function (x, element) {
+          var posx = parseInt(element.getAttribute("posx"));
+          if ((posx > 0 && posx < 38) && !($(element).hasClass("forward") || $(element).hasClass("reverse"))) {
+            element.className += " buff";
+
+            // if (i > 0) {
+            //   var prevGradientCount = parseInt($previousRow.children()[x].getAttribute("gradient"));
+            //   element.setAttribute("gradient", prevGradientCount + 1);
+            //   //set color gradient
+            //   element.setAttribute("style", "background-color: rgb(" +
+            //     (88 + (colorStep.red * prevGradientCount + 1)) + ", " +
+            //     (175 + (colorStep.green * prevGradientCount + 1)) + ", " +
+            //     (218 + (colorStep.blue * prevGradientCount + 1)) + ");");
+            // }
+          }
+        });
+      }
+
+      $("#pattern-name").text(pattern.name);
+      $("#oil-pattern-distance").text(patternLength + " Feet");
+      $("#reverse-brush-drop").text(patternLength + " Feet");
+      $("#oil-per-board").text(pattern.oilPerBoard);
+
+      $("#forward-oil-total").text(((forwardTotalBoards * oilPerBoard) / 1000) + " mL");
+      $("#reverse-oil-total").text(((reverseTotalBoards * oilPerBoard) / 1000) + " mL");
+      $("#volume-oil-total").text(((forwardTotalBoards + reverseTotalBoards) * oilPerBoard / 1000) + " mL");
+      $("#forward-boards-crossed").text(forwardTotalBoards + " Boards");
+      $("#reverse-boards-crossed").text(reverseTotalBoards + " Boards");
+      $("#total-boards-crossed").text((forwardTotalBoards + reverseTotalBoards) + " Boards");
+    }
+
+    function getRGB(str) {
+      var match = str.match(/rgba?\((\d{1,3}), ?(\d{1,3}), ?(\d{1,3})\)?(?:, ?(\d(?:\.\d?))\))?/);
+      return match ? {
+        red: match[1],
+        green: match[2],
+        blue: match[3]
+      } : {};
+    }
+
+    function calculateColorStep(steps) {
+      var nr = (targetColor.red - startingColor.red);
+      var ng = (targetColor.green - startingColor.green);
+      var nb = (targetColor.blue - startingColor.blue);
+
+      return {
+        "red": nr / steps,
+        "green": ng / steps,
+        "blue": nb / steps
+      }
+    }
+  </script>
+</body>
+
+</html>

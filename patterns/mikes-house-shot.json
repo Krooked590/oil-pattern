@@ -1,0 +1,24 @@
+{
+    "name": "Mikes House Shot",
+    "oilPerBoard": "50 uL",
+    "forward": [
+        { "start": "2L", "stop": "2R", "loads": "2", "speed": "14", "startf": "0.0", "end": "1.9" },
+        { "start": "7L", "stop": "7R", "loads": "1", "speed": "18", "startf": "1.9", "end": "4.4" },
+        { "start": "8L", "stop": "8R", "loads": "4", "speed": "18", "startf": "4.4", "end": "14.6" },
+        { "start": "11L", "stop": "11R", "loads": "4", "speed": "18", "startf": "14.6", "end": "24.8" },
+        { "start": "15L", "stop": "13R", "loads": "2", "speed": "18", "startf": "24.8", "end": "29.9" },
+        { "start": "15L", "stop": "15R", "loads": "2", "speed": "22", "startf": "29.9", "end": "36.1" },
+        { "start": "2L", "stop": "2R", "loads": "0", "speed": "22", "startf": "36.1", "end": "40.0" },
+        { "start": "2L", "stop": "2R", "loads": "0", "speed": "30", "startf": "40.0", "end": "45.0" }
+    ],
+    "reverse": [
+        { "start": "2L", "stop": "2R", "loads": "0", "speed": "30", "startf": "45.0", "end": "32.0" },
+        { "start": "15L", "stop": "15R", "loads": "2", "speed": "18", "startf": "32.0", "end": "25.8" },
+        { "start": "15L", "stop": "11R", "loads": "2", "speed": "18", "startf": "25.8", "end": "20.7" },
+        { "start": "11L", "stop": "10R", "loads": "2", "speed": "18", "startf": "20.7", "end": "15.6" },
+        { "start": "9L", "stop": "9R", "loads": "2", "speed": "18", "startf": "15.6", "end": "11.7" },
+        { "start": "8L", "stop": "8R", "loads": "1", "speed": "22", "startf": "11.7", "end": "9.8" },
+        { "start": "2L", "stop": "2R", "loads": "1", "speed": "22", "startf": "9.8", "end": "7.9" },
+        { "start": "2L", "stop": "2R", "loads": "0", "speed": "22", "startf": "7.9", "end": "0.0" }
+    ]
+}
