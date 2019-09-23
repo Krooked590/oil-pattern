@@ -280,15 +280,15 @@
           if ((posx > 0 && posx < 38) && !($(element).hasClass("forward") || $(element).hasClass("reverse"))) {
             element.className += " buff";
 
-            // if (i > 0) {
-            //   var prevGradientCount = parseInt($previousRow.children()[x].getAttribute("gradient"));
-            //   element.setAttribute("gradient", prevGradientCount + 1);
-            //   //set color gradient
-            //   element.setAttribute("style", "background-color: rgb(" +
-            //     (88 + (colorStep.red * prevGradientCount + 1)) + ", " +
-            //     (175 + (colorStep.green * prevGradientCount + 1)) + ", " +
-            //     (218 + (colorStep.blue * prevGradientCount + 1)) + ");");
-            // }
+            if (i > 0) {
+              var prevGradientCount = parseInt($previousRow.children()[x].getAttribute("gradient"));
+              element.setAttribute("gradient", prevGradientCount + 1);
+              //set color gradient
+              element.setAttribute("style", "background-color: rgb(" +
+                (88 + (colorStep.red * prevGradientCount + 1)) + ", " +
+                (175 + (colorStep.green * prevGradientCount + 1)) + ", " +
+                (218 + (colorStep.blue * prevGradientCount + 1)) + ");");
+            }
           }
         });
       }
