@@ -1,0 +1,16 @@
+<script>
+    var pattern = JSON.parse('<%- JSON.stringify(pattern) %>');
+    $().ready(function () {
+        $("#forward-oil-total").text((("<%= forwardTotalBoards * oilPerBoard %>") / 1000) + " mL");
+        $("#reverse-oil-total").text((("<%= reverseTotalBoards * oilPerBoard %>") / 1000) + " mL");
+        $("#volume-oil-total").text(("<%= (forwardTotalBoards + reverseTotalBoards) * oilPerBoard %>" / 1000) + " mL");
+        $("#forward-boards-crossed").text("<%= forwardTotalBoards %>" + " Boards");
+        $("#reverse-boards-crossed").text("<%= reverseTotalBoards %>" + " Boards");
+        $("#total-boards-crossed").text(("<%= forwardTotalBoards + reverseTotalBoards %>") + " Boards");
+
+        layoutPattern(pattern);
+    });
+</script>
+</body>
+
+</html>

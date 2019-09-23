@@ -1,5 +1,6 @@
 .DS_Store
+.env
+.jshintrc
 *.keys
 *.crt
 *.key
-players-qr-scanner-723fbb840dd1.json

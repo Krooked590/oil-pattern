@@ -1,0 +1,177 @@
+<% var oilPerBoard = parseInt(pattern.oilPerBoard); %>
+<% var patternLength = parseInt(pattern.reverse[0].startf); %>
+<% var forwardTotalBoards = 0; %>
+<% var reverseTotalBoards = 0; %>
+<% var xstart = 0; %>
+<% var xend = 0; %>
+<% var ystart = 0; %>
+<% var yend = 0; %>
+<% var loads = 0; %>
+<% var crossed = 0; %>
+
+<%- include('partials/header') %>
+
+<div class="root-div">
+    <div class="header">
+        <h1 id="pattern-name"><%= pattern.name %></h1>
+    </div>
+
+    <hr>
+    <div class="">
+        <div class="text-left head-block">
+            Oil Pattern Distance: <span><strong id="oil-pattern-distance" class="head-value"><%= patternLength %>
+                    Feet</strong></span>
+        </div>
+        <div class="text-center head-block">
+            Reverse Brush Drop: <span id="reverse-brush-drop" class="head-value"><%= patternLength %> Feet</span>
+        </div>
+        <div class="text-right head-block">
+            Oil Per Board: <span class="head-value"><strong id="oil-per-board"><%= oilPerBoard %>
+                    uL</strong></span>
+        </div>
+    </div>
+
+    <div class="">
+        <div class="text-left head-block">
+            Forward Oil Total: <span id="forward-oil-total" class="head-value">42 Feet</span>
+        </div>
+        <div class="text-center head-block">
+            Reverse Oil Total: <span id="reverse-oil-total" class="head-value">42 Feet</span>
+        </div>
+        <div class="text-right head-block">
+            Volume Oil Total: <span id="volume-oil-total" class="head-value">42 Feet</span>
+        </div>
+    </div>
+
+    <div class="">
+        <div class="text-left head-block">
+            Forward Boards Crossed: <span id="forward-boards-crossed" class="head-value">42 Feet</span>
+        </div>
+        <div class="text-center head-block">
+            Reverse Boards Crossed: <span id="reverse-boards-crossed" class="head-value">42 Feet</span>
+        </div>
+        <div class="text-right head-block">
+            Total Boards Crossed: <span id="total-boards-crossed" class="head-value">42 Feet</span>
+        </div>
+    </div>
+    <hr>
+
+    <!-- tables, colours, pattern -->
+    <div class="pattern-data">
+        <div class="pattern-passes">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col"><strong>F</strong></th>
+                        <th scope="col">Start</th>
+                        <th scope="col">Stop</th>
+                        <th scope="col">Loads</th>
+                        <th scope="col">Speed</th>
+                        <th scope="col">Boards</th>
+                        <th scope="col">Start</th>
+                        <th scope="col">End</th>
+                        <th scope="col">Feet</th>
+                        <th scope="col">T.Oil</th>
+                    </tr>
+                </thead>
+                <tbody id="forward-body">
+                    <% for (var p = 0; p < pattern.forward.length; p++) { %>
+                    <% xstart = parseInt(pattern.forward[p].start) - 1; %>
+                    <% xend = 39 - parseInt(pattern.forward[p].stop); %>
+                    <% loads = parseInt(pattern.forward[p].loads); %>
+                    <% ystart = Math.floor(parseFloat(pattern.forward[p].startf)); %>
+                    <% yend = Math.floor(parseFloat(pattern.forward[p].end)); %>
+                    <% crossed = (xend + 1 - xstart) * loads; %>
+                    <% forwardTotalBoards += crossed; %>
+
+                    <tr>
+                        <th scope="row"><%= (p+1) %></th>
+                        <td><%= pattern.forward[p].start %></td>
+                        <td><%= pattern.forward[p].stop  %></td>
+                        <td><%= pattern.forward[p].loads %></td>
+                        <td><%= pattern.forward[p].speed  %></td>
+                        <td><%= crossed %></td>
+                        <td><%= pattern.forward[p].startf %></td>
+                        <td><%= pattern.forward[p].end %></td>
+                        <td><%= (parseFloat(pattern.forward[p].end) - parseFloat(pattern.forward[p].startf)).toFixed(1) %></td>
+                        <td><%= oilPerBoard * crossed %></td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col"><strong>R</strong></th>
+                        <th scope="col">Start</th>
+                        <th scope="col">Stop</th>
+                        <th scope="col">Loads</th>
+                        <th scope="col">Speed</th>
+                        <th scope="col">Boards</th>
+                        <th scope="col">Start</th>
+                        <th scope="col">End</th>
+                        <th scope="col">Feet</th>
+                        <th scope="col">T.Oil</th>
+                    </tr>
+                </thead>
+                <tbody id="reverse-body">
+                    <% for (var p = 0; p < pattern.reverse.length; p++) { %>
+                    <% xstart=parseInt(pattern.reverse[p].start) - 1; %>
+                    <% xend=39 - parseInt(pattern.reverse[p].stop); %>
+                    <% loads=parseInt(pattern.reverse[p].loads); %>
+                    <% ystart=Math.floor(parseFloat(pattern.reverse[p].startf)); %>
+                    <% yend=Math.floor(parseFloat(pattern.reverse[p].end)); %>
+                    <% crossed= (xend + 1 - xstart) * loads; %>
+                    <% reverseTotalBoards += crossed; %>
+
+                    <tr>
+                        <th scope="row"><%= (p + 1) %></th>
+                        <td><%= pattern.reverse[p].start %></td>
+                        <td><%= pattern.reverse[p].stop %></td>
+                        <td><%= pattern.reverse[p].loads %></td>
+                        <td><%= pattern.reverse[p].speed %></td>
+                        <td><%= crossed %></td>
+                        <td><%= pattern.reverse[p].startf %></td>
+                        <td><%= pattern.reverse[p].end %></td>
+                        <td><%= (parseFloat(pattern.reverse[p].end) - parseFloat(pattern.reverse[p].startf)).toFixed(1) %>
+                        </td>
+                        <td><%= (oilPerBoard * crossed) %></td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pattern-colors">
+            Forward
+            <br>
+            <div class="color-section forward"></div>
+            Reverse
+            <br>
+            <div class="color-section reverse"></div>
+            Combined
+            <br>
+            <div class="color-section combined"></div>
+            Buff
+            <br>
+            <div class="color-section buff"></div>
+        </div>
+
+        <div class="pattern-graphs">
+            <div style="text-align: right;">
+                <table class="">
+                    <tbody id="pattern-body">
+                        <% for (var i = 0; i < 60; i++) { %>
+                        <tr footage=<%= (59 - i) %> class="lane-foot">
+                            <% for (var j = 0; j < 39; j++) { %>
+                            <td posy=<%= (59 - i) %> posx=<%= j %> gradient=-1 class="board"></td>
+                            <% } %>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('partials/footer', { pattern: pattern, oilPerBoard: oilPerBoard, forwardTotalBoards: forwardTotalBoards, reverseTotalBoards: reverseTotalBoards }) %>

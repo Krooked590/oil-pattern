@@ -18,7 +18,7 @@ var usOpen = {
     ]
 };
 
-var mikesHouseShot = {
+var houseShot = {
     "name": "Players House Shot",
     "oilPerBoard": "50 uL",
     "forward": [
