@@ -19,21 +19,6 @@ var db = admin.firestore();
 var col = db.collection('patterns');
 var pattern = Pattern.playersHouseShot();
 
-// let docRef = col.doc("gepxX9xdfZGPHBx46xVE");
-// forward = JSON.stringify(pattern.forward);
-// reverse = JSON.stringify(pattern.reverse);
-// docRef.set({
-//     id: docRef.id,
-//     name: pattern.name,
-//     oilPerBoard: pattern.oilPerBoard,
-//     forward: forward,
-//     reverse: reverse
-// }).then(doc => {
-//     console.log('done');
-// }).catch(err => {
-//     console.log('error saving pattern');
-// });
-
 app.set("view engine", "ejs");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -50,6 +35,21 @@ app.get('/pattern', (req, res) => {
 
 app.get('/pattern/new', (req, res) => {
     res.render('new');
+});
+
+app.get('/pattern/select', (req, res) => {
+    col.get()
+        .then(snapShot => { 
+            var patterns = [];
+            snapShot.forEach(doc => {
+                let data = doc.data();
+                let selected = (pattern.name == data.name) ? true : false;
+                patterns.push({ id: data.id, name: data.name, selected: selected });
+            });
+
+            res.render('select', { patterns });
+        })
+        .catch(err => { res.send('error getting patterns'); });
 });
 
 app.get('/pattern/:id', (req, res) => {
@@ -73,9 +73,8 @@ app.get('/pattern/:id', (req, res) => {
         });
 });
 
-app.put('/pattern/:id', (req, res) => {
-    let id = req.params.id;
-    col.doc(id).get()
+app.post('/pattern/select', (req, res) => {
+    col.doc(req.body.pattern).get()
         .then(doc => {
             if (!doc.exists) {
                 console.log('requested document no found!', id);
@@ -149,9 +148,6 @@ app.post('/pattern', (req, res) => {
         console.log('error saving pattern');
         res.send('error saving pattern');
     });
-
-    //redirect to new display pattern
-    // res.send('adding a pattern will go here');
 });
 
 app.listen(port, () => {
