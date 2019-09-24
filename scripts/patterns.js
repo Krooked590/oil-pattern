@@ -20,7 +20,7 @@ class Pattern {
     static playersHouseShot() {
         return {
             "name": "Players House Shot",
-            "oilPerBoard": "38 uL",
+            "oilPerBoard": "38",
             "forward": [
                 { "start": "2", "stop": "2", "loads": "2", "speed": "10", "startf": "0.0", "end": "1.0" },
                 { "start": "8", "stop": "8", "loads": "1", "speed": "14", "startf": "1.0", "end": "3.0" },
@@ -49,7 +49,7 @@ class Pattern {
     static usOpen() {
         return {
             "name": "US Open 40ft 2012",
-            "oilPerBoard": "40 uL",
+            "oilPerBoard": "40",
             "forward":
                 [{ "start": "2", "stop": "2", "loads": "4", "speed": "14", "startf": "0.0", "end": "5.9" },
                 { "start": "2", "stop": "2", "loads": "3", "speed": "18", "startf": "5.9", "end": "13.5" },

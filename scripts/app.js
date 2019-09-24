@@ -40,6 +40,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static('static'));
 
+app.get('/', (req, res) => { 
+    res.redirect('/pattern');
+});
+
 app.get('/pattern', (req, res) => {
     res.render('index', { pattern });
 });

@@ -23,9 +23,9 @@ function calculateColorStep(steps) {
 }
 
 function layoutPattern(pattern) {
-    var colorStep = calculateColorStep(52);
     var $rows = $($("tr.lane-foot").get().reverse());
     var patternLength = parseInt(pattern.reverse[0].startf);
+    var colorStep = calculateColorStep(patternLength);
 
     //forward passes
     for (var p = 0; p < pattern.forward.length; p++) {

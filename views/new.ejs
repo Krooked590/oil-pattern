@@ -114,7 +114,7 @@
                         </div>
                     </div>
                 </div>
-                <button>TEST</button>
+                <button class="btn btn-success">Submit</button>
             </form>
         </div>
     </div>
@@ -123,27 +123,27 @@
     <div id="forwardTemplate" hidden=true>
         <div class="form-group form-row">
             <div class="col">
-                <label>Start:</label>
+                <!-- <label>Start:</label> -->
                 <input class="form-control" type="text" name="forward[start]" placeholder="Required" required>
             </div>
             <div class="col">
-                <label>Stop:</label>
+                <!-- <label>Stop:</label> -->
                 <input class="form-control" type="text" name="forward[stop]" placeholder="Required" required>
             </div>
             <div class="col">
-                <label>Loads:</label>
+                <!-- <label>Loads:</label> -->
                 <input class="form-control" type="text" name="forward[loads]" placeholder="Required" required>
             </div>
             <div class="col">
-                <label>Speed:</label>
+                <!-- <label>Speed:</label> -->
                 <input class="form-control" type="text" name="forward[speed]" placeholder="Required" required>
             </div>
             <div class="col">
-                <label>Start:</label>
+                <!-- <label>Start:</label> -->
                 <input class="form-control" type="text" name="forward[startF]" placeholder="Required" required>
             </div>
             <div class="col">
-                <label>End:</label>
+                <!-- <label>End:</label> -->
                 <input class="form-control" type="text" name="forward[end]" placeholder="Required" required>
             </div>
         </div>
@@ -151,27 +151,27 @@
     <div id="reverseTemplate" hidden=true>
         <div class="form-group form-row">
             <div class="col">
-                <label>Start:</label>
+                <!-- <label>Start:</label> -->
                 <input class="form-control" type="text" name="reverse[start]" placeholder="Required" required>
             </div>
             <div class="col">
-                <label>Stop:</label>
+                <!-- <label>Stop:</label> -->
                 <input class="form-control" type="text" name="reverse[stop]" placeholder="Required" required>
             </div>
             <div class="col">
-                <label>Loads:</label>
+                <!-- <label>Loads:</label> -->
                 <input class="form-control" type="text" name="reverse[loads]" placeholder="Required" required>
             </div>
             <div class="col">
-                <label>Speed:</label>
+                <!-- <label>Speed:</label> -->
                 <input class="form-control" type="text" name="reverse[speed]" placeholder="Required" required>
             </div>
             <div class="col">
-                <label>Start:</label>
+                <!-- <label>Start:</label> -->
                 <input class="form-control" type="text" name="reverse[startF]" placeholder="Required" required>
             </div>
             <div class="col">
-                <label>End:</label>
+                <!-- <label>End:</label> -->
                 <input class="form-control" type="text" name="reverse[end]" placeholder="Required" required>
             </div>
         </div>
@@ -189,13 +189,11 @@
     <script>
         $().ready(function () {
             $("#forwardPassAdd").click(function () {
-                // alert('clicked');
                 var t = $("#forwardTemplate").html();
                 $("#forwardPass").append(t);
             });
 
             $("#reversePassAdd").click(function () {
-                // alert('clicked');
                 var t = $("#reverseTemplate").html();
                 $("#reversePass").append(t);
             });
