@@ -86,8 +86,8 @@
 
                     <tr>
                         <th scope="row"><%= (p+1) %></th>
-                        <td><%= pattern.forward[p].start %></td>
-                        <td><%= pattern.forward[p].stop  %></td>
+                        <td><%= pattern.forward[p].start + "L" %></td>
+                        <td><%= pattern.forward[p].stop + "R" %></td>
                         <td><%= pattern.forward[p].loads %></td>
                         <td><%= pattern.forward[p].speed  %></td>
                         <td><%= crossed %></td>
@@ -126,8 +126,8 @@
 
                     <tr>
                         <th scope="row"><%= (p + 1) %></th>
-                        <td><%= pattern.reverse[p].start %></td>
-                        <td><%= pattern.reverse[p].stop %></td>
+                        <td><%= pattern.reverse[p].start + "L" %></td>
+                        <td><%= pattern.reverse[p].stop + "R" %></td>
                         <td><%= pattern.reverse[p].loads %></td>
                         <td><%= pattern.reverse[p].speed %></td>
                         <td><%= crossed %></td>
