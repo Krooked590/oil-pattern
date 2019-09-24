@@ -76,12 +76,12 @@
                 </thead>
                 <tbody id="forward-body">
                     <% for (var p = 0; p < pattern.forward.length; p++) { %>
-                    <% xstart = parseInt(pattern.forward[p].start) - 1; %>
-                    <% xend = 39 - parseInt(pattern.forward[p].stop); %>
-                    <% loads = parseInt(pattern.forward[p].loads); %>
-                    <% ystart = Math.floor(parseFloat(pattern.forward[p].startf)); %>
-                    <% yend = Math.floor(parseFloat(pattern.forward[p].end)); %>
-                    <% crossed = (xend + 1 - xstart) * loads; %>
+                    <% var xstart = parseInt(pattern.forward[p].start) - 1; %>
+                    <% var xend = 39 - parseInt(pattern.forward[p].stop); %>
+                    <% var loads = parseInt(pattern.forward[p].loads); %>
+                    <% var ystart = Math.floor(parseFloat(pattern.forward[p].startf)); %>
+                    <% var yend = Math.floor(parseFloat(pattern.forward[p].end)); %>
+                    <% var crossed = (xend + 1 - xstart) * loads; %>
                     <% forwardTotalBoards += crossed; %>
 
                     <tr>
@@ -116,12 +116,12 @@
                 </thead>
                 <tbody id="reverse-body">
                     <% for (var p = 0; p < pattern.reverse.length; p++) { %>
-                    <% xstart=parseInt(pattern.reverse[p].start) - 1; %>
-                    <% xend=39 - parseInt(pattern.reverse[p].stop); %>
-                    <% loads=parseInt(pattern.reverse[p].loads); %>
-                    <% ystart=Math.floor(parseFloat(pattern.reverse[p].startf)); %>
-                    <% yend=Math.floor(parseFloat(pattern.reverse[p].end)); %>
-                    <% crossed= (xend + 1 - xstart) * loads; %>
+                    <% var xstart = parseInt(pattern.reverse[p].start) - 1; %>
+                    <% var xend = 39 - parseInt(pattern.reverse[p].stop); %>
+                    <% var loads = parseInt(pattern.reverse[p].loads); %>
+                    <% var ystart = Math.floor(parseFloat(pattern.reverse[p].startf)); %>
+                    <% var yend = Math.floor(parseFloat(pattern.reverse[p].end)); %>
+                    <% var crossed = (xend + 1 - xstart) * loads; %>
                     <% reverseTotalBoards += crossed; %>
 
                     <tr>
