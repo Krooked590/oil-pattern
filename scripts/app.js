@@ -29,6 +29,10 @@ app.get('/pattern', (req, res) => {
     res.render('index', { pattern });
 });
 
+app.get('/pattern/new', (req, res) => {
+    res.render('new');
+});
+
 app.get('/pattern/:id', (req, res) => {
     let id = req.params.id;
     col.doc(id).get()
@@ -70,6 +74,7 @@ app.put('/pattern/:id', (req, res) => {
 });
 
 app.post('/pattern', (req, res) => {
+    console.log(req.body.forward.startFootage.length);
     //add pattern to database
     // let docRef = col.doc();
     // let forward = JSON.stringify(pattern.forward);
