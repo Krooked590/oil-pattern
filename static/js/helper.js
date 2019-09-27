@@ -73,15 +73,16 @@ function layoutPattern(pattern) {
 
         var $row = $rows.eq(i);
         $row.children().each(function (x, element) {
-            var posx = parseInt(element.getAttribute("posx"));
-            if ((posx > 0 && posx < 38) && !($(element).hasClass("forward") || $(element).hasClass("reverse"))) {
+            var $element = $(element);
+            var posx = parseInt($element.attr("posx"));
+            if ((posx > 0 && posx < 38) && !($element.hasClass("forward") || $element.hasClass("reverse"))) {
                 element.className += " buff";
 
                 if (i > 0) {
-                    var prevGradientCount = parseInt($previousRow.children()[x].getAttribute("gradient"));
-                    element.setAttribute("gradient", prevGradientCount + 1);
+                    var prevGradientCount = parseInt($previousRow.children().eq(x).attr("gradient"));
+                    $element.attr("gradient", prevGradientCount + 1);
                     //set color gradient
-                    element.setAttribute("style", "background-color: rgb(" +
+                    $element.attr("style", "background-color: rgb(" +
                         (88 + (colorStep.red * prevGradientCount + 1)) + ", " +
                         (175 + (colorStep.green * prevGradientCount + 1)) + ", " +
                         (218 + (colorStep.blue * prevGradientCount + 1)) + ");");
