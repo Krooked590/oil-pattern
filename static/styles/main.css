@@ -163,19 +163,19 @@ hr {
 }
 
 .forward {
-    background: #0098f5;
+    background-color: #0098f5;
 }
 
 .reverse {
-    background: #001df5;
+    background-color: #001df5;
 }
 
 .combined {
-    background: #000a85;
+    background-color: #000a85;
 }
 
 .buff {
-    background: #58afda;
+    background-color: #58afda;
 }
 
 .pattern-passes {
@@ -209,23 +209,23 @@ hr {
     height: 11px;
     border-right: 1px solid black;
     border-left: 1px solid black;
-    background: #fdd177;
+    background-color: #fdd177;
 }
 
 .board.forward {
-    background: #0098f5;
+    background-color: #0098f5;
 }
 
 .board.reverse {
-    background: #001df5;
+    background-color: #001df5;
 }
 
 .board.forward.reverse {
-    background: #000a85;
+    background-color: #000a85;
 }
 
 .board.buff {
-    background: #58afda;
+    background-color: #58afda;
 }
 
 .board-wide {

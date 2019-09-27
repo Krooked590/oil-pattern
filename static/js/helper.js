@@ -77,8 +77,6 @@ function layoutPattern(pattern) {
             var $element = $(element);
             var posx = parseInt($element.attr("posx"));
             if ((posx > 0 && posx < 38) && !($element.hasClass("forward") || $element.hasClass("reverse"))) {
-                element.className += " buff";
-
                 if (i > 0) {
                     var prevGradientCount = parseInt($previousRow.children().eq(x).attr("gradient"));
                     $element.attr("gradient", prevGradientCount + 1);
@@ -87,6 +85,8 @@ function layoutPattern(pattern) {
                         (88 + (colorStep.red * prevGradientCount + 1)) + ", " +
                         (175 + (colorStep.green * prevGradientCount + 1)) + ", " +
                         (218 + (colorStep.blue * prevGradientCount + 1)) + ");");
+                } else {
+                    element.className += " buff";
                 }
             }
         });
