@@ -67,10 +67,10 @@ function layoutPattern(pattern) {
 
     //buff pass
     for (var i = 0; i < patternLength; i++) {
-        if (i > 0) {
-            var $rows = $($("tr.lane-foot").get().reverse());
-            var $previousRow = $rows.eq(i - 1);
-        }
+        // if (i > 0) {
+        //     var $rows = $($("tr.lane-foot").get().reverse());
+        //     var $previousRow = $rows.eq(i - 1);
+        // }
 
         var $row = $rows.eq(i);
         $row.children().each(function (x, element) {
@@ -90,5 +90,6 @@ function layoutPattern(pattern) {
                 }
             }
         });
+        var $previousRow = $row;
     }
 }
