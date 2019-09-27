@@ -78,8 +78,8 @@ function layoutPattern(pattern) {
                     $element.attr("gradient", prevGradientCount + 1);
                     //set color gradient
                     $element.attr("style", "background-color: rgb(" +
-                        (88 + (colorStep.red * prevGradientCount + 1)) + ", " +
-                        (175 + (colorStep.green * prevGradientCount + 1)) + ", " +
+                        (88 + (colorStep.red * prevGradientCount + 1)) + "," +
+                        (175 + (colorStep.green * prevGradientCount + 1)) + "," +
                         (218 + (colorStep.blue * prevGradientCount + 1)) + ");");
                 }
             }
