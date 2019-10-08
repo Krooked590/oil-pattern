@@ -1,23 +1,23 @@
-// function getRGB(str) {
-//     var match = str.match(/rgba?\((\d{1,3}), ?(\d{1,3}), ?(\d{1,3})\)?(?:, ?(\d(?:\.\d?))\))?/);
-//     return match ? {
-//         red: match[1],
-//         green: match[2],
-//         blue: match[3]
-//     } : {};
-// }
+function getRGB(str) {
+    var match = str.match(/rgba?\((\d{1,3}), ?(\d{1,3}), ?(\d{1,3})\)?(?:, ?(\d(?:\.\d?))\))?/);
+    return match ? {
+        red: match[1],
+        green: match[2],
+        blue: match[3]
+    } : {};
+}
 
 function calculateColorStep(steps) {
-    // var startingColor = getRGB("rgb(88, 175, 218)"); //same as buff color in css
-    // var targetColor = getRGB("rgb(255, 255, 255)"); //white for now
+    var startingColor = getRGB("rgb(88, 175, 218)"); //same as buff color in css
+    var targetColor = getRGB("rgb(255, 255, 255)"); //white for now
 
-    // var nr = (targetColor.red - startingColor.red);
-    // var ng = (targetColor.green - startingColor.green);
-    // var nb = (targetColor.blue - startingColor.blue);
+    var nr = (targetColor.red - startingColor.red);
+    var ng = (targetColor.green - startingColor.green);
+    var nb = (targetColor.blue - startingColor.blue);
 
-    var nr = (255 - 88);
-    var ng = (255 - 175);
-    var nb = (255 - 218);
+    // var nr = (255 - 88);
+    // var ng = (255 - 175);
+    // var nb = (255 - 218);
 
     return {
         "red": nr / steps,
@@ -84,14 +84,10 @@ function layoutPattern(pattern) {
                     $element.attr("gradient", (prevGradientCount + 1));
 
                     //set color gradient
-                    // $element.attr("style", "background-color: rgb(" +
-                    //     (88 + float2int( (colorStep.red * (prevGradientCount + 1) ) ) ) + "," +
-                    //     (175 + float2int( (colorStep.green * (prevGradientCount + 1) ) ) ) + "," +
-                    //     (218 + float2int( (colorStep.blue * (prevGradientCount + 1) ) ) ) + ");");
                     $element.attr("style", "background-color: rgb(" +
-                        (88 + (colorStep.red * (prevGradientCount + 1))) + "," +
-                        (175 + (colorStep.green * (prevGradientCount + 1))) + "," +
-                        (218 + (colorStep.blue * (prevGradientCount + 1))) + ");");
+                        (88 + float2int( (colorStep.red * (prevGradientCount + 1) ) ) ) + "," +
+                        (175 + float2int( (colorStep.green * (prevGradientCount + 1) ) ) ) + "," +
+                        (218 + float2int( (colorStep.blue * (prevGradientCount + 1) ) ) ) + ");");
                 }
 
             }
