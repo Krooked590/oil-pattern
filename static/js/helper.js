@@ -79,9 +79,10 @@ function layoutPattern(pattern) {
                 element.className += " buff";
 
                 if (i > 0) {
+                    //it is setting and reading the gradient number correctly
                     var prevGradientCount = parseInt($previousRow.children().eq(x).attr("gradient"));
                     $element.attr("gradient", (prevGradientCount + 1));
-                    // $element.text(""+(prevGradientCount+1)); //it is setting and reading the gradient number correctly
+
                     //set color gradient
                     $element.attr("style", "background-color: rgb(" +
                         (88 + float2int( (colorStep.red * (prevGradientCount + 1) ) ) ) + "," +
