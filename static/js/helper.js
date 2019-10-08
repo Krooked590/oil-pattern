@@ -68,20 +68,24 @@ function layoutPattern(pattern) {
     //buff pass
     for (var i = 0; i < patternLength; i++) {
         var $row = $rows.eq(i);
+        // if (i > 0) var $previousRow = $rows.eq(i - 1);
         $row.children().each(function (x, element) {
             var $element = $(element);
             var posx = parseInt($element.attr("posx"));
             if ((posx > 0 && posx < 38) && !($element.hasClass("forward") || $element.hasClass("reverse"))) {
                 element.className += " buff";
+
                 if (i > 0) {
                     var prevGradientCount = parseInt($previousRow.children().eq(x).attr("gradient"));
-                    $element.attr("gradient", prevGradientCount + 1);
+                    $element.attr("gradient", (prevGradientCount + 1));
+                    $element.text(""+(prevGradientCount+1));
                     //set color gradient
                     $element.attr("style", "background-color: rgb(" +
-                        (88 + (colorStep.red * prevGradientCount + 1)) + "," +
-                        (175 + (colorStep.green * prevGradientCount + 1)) + "," +
-                        (218 + (colorStep.blue * prevGradientCount + 1)) + ");");
+                        (88 + (colorStep.red * (prevGradientCount + 1))) + "," +
+                        (175 + (colorStep.green * (prevGradientCount + 1))) + "," +
+                        (218 + (colorStep.blue * (prevGradientCount + 1))) + ");");
                 }
+
             }
         });
         var $previousRow = $row;
