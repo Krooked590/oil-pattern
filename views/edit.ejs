@@ -16,17 +16,17 @@
 <body>
     <div class="container">
         <div style="margin: 40px auto">
-            <form id="createForm" action="/pattern" method="POST">
+            <form id="createForm" method="POST" action="/pattern?_method=PUT">
                 <div class="form-group form-row">
                     <div class="col-9">
                         <label for="name">Pattern Name:</label>
                         <input class="form-control" type="text" id="name" name="pattern[name]" placeholder="Required"
-                            required>
+                            value="<%= pattern.name %>" required>
                     </div>
                     <div class="col-3">
                         <label for="oilPerBoard">Oil Per Board:</label>
                         <input class="form-control" type="text" id="oilPerBoard" name="pattern[oilPerBoard]"
-                            placeholder="Required" required>
+                            placeholder="Required" value="<%= pattern.oilPerBoard %>" required>
                     </div>
                 </div>
                 <div class="row">
@@ -39,37 +39,40 @@
                     </div>
                 </div>
                 <div id="forwardPass">
+                    <% for (var p = 0; p < pattern.forward.length; p++) { %>
                     <div class="form-group form-row">
                         <div class="col">
                             <label>Start:</label>
                             <input class="form-control" type="text" name="forward[start]" placeholder="Required"
-                                required>
+                                value="<%= pattern.forward[p].start %>" required>
                         </div>
                         <div class="col">
                             <label>Stop:</label>
                             <input class="form-control" type="text" name="forward[stop]" placeholder="Required"
-                                required>
+                                value="<%= pattern.forward[p].stop %>" required>
                         </div>
                         <div class="col">
                             <label>Loads:</label>
                             <input class="form-control" type="text" name="forward[loads]" placeholder="Required"
-                                required>
+                                value="<%= pattern.forward[p].loads %>" required>
                         </div>
                         <div class="col">
                             <label>Speed:</label>
                             <input class="form-control" type="text" name="forward[speed]" placeholder="Required"
-                                required>
+                                value="<%= pattern.forward[p].speed %>" required>
                         </div>
                         <div class="col">
                             <label>StartF:</label>
                             <input class="form-control" type="text" name="forward[startF]" placeholder="Required"
-                                required>
+                                value="<%= pattern.forward[p].startf %>" required>
                         </div>
                         <div class="col">
                             <label>End:</label>
-                            <input class="form-control" type="text" name="forward[end]" placeholder="Required" required>
+                            <input class="form-control" type="text" name="forward[end]" placeholder="Required"
+                                value="<%= pattern.forward[p].end %>" required>
                         </div>
                     </div>
+                    <% } %>
                 </div>
                 <br>
                 <div class="row">
@@ -81,99 +84,45 @@
                         </h3>
                     </div>
                 </div>
-                <div id="reversePass" class="form-row">
+                <div id="reversePass">
+                    <% for (var p = 0; p < pattern.reverse.length; p++) { %>
                     <div class="form-group form-row">
                         <div class="col">
                             <label>Start:</label>
                             <input class="form-control" type="text" name="reverse[start]" placeholder="Required"
-                                required>
+                                value="<%= pattern.reverse[p].start %>" required>
                         </div>
                         <div class="col">
                             <label>Stop:</label>
                             <input class="form-control" type="text" name="reverse[stop]" placeholder="Required"
-                                required>
+                                value="<%= pattern.reverse[p].stop %>" required>
                         </div>
                         <div class="col">
                             <label>Loads:</label>
                             <input class="form-control" type="text" name="reverse[loads]" placeholder="Required"
-                                required>
+                                 value="<%= pattern.reverse[p].loads %>" required>
                         </div>
                         <div class="col">
                             <label>Speed:</label>
                             <input class="form-control" type="text" name="reverse[speed]" placeholder="Required"
-                                required>
+                                value="<%= pattern.reverse[p].speed %>" required>
                         </div>
                         <div class="col">
                             <label>StartF:</label>
                             <input class="form-control" type="text" name="reverse[startF]" placeholder="Required"
-                                required>
+                                value="<%= pattern.reverse[p].startf %>" required>
                         </div>
                         <div class="col">
                             <label>End:</label>
-                            <input class="form-control" type="text" name="reverse[end]" placeholder="Required" required>
+                            <input class="form-control" type="text" name="reverse[end]" placeholder="Required" 
+                            value="<%= pattern.reverse[p].end %>" required>
                         </div>
                     </div>
+                    <% } %>
                 </div>
+                <input type="hidden" name="pattern[id]" id="patternId" value="<%= pattern.id %>">
                 <button class="btn btn-success">Submit</button>
             </form>
-        </div>
-    </div>
-
-
-    <div id="forwardTemplate" hidden>
-        <div class="form-group form-row">
-            <div class="col">
-                <!-- <label>Start:</label> -->
-                <input class="form-control" type="text" name="forward[start]" placeholder="Required" required>
-            </div>
-            <div class="col">
-                <!-- <label>Stop:</label> -->
-                <input class="form-control" type="text" name="forward[stop]" placeholder="Required" required>
-            </div>
-            <div class="col">
-                <!-- <label>Loads:</label> -->
-                <input class="form-control" type="text" name="forward[loads]" placeholder="Required" required>
-            </div>
-            <div class="col">
-                <!-- <label>Speed:</label> -->
-                <input class="form-control" type="text" name="forward[speed]" placeholder="Required" required>
-            </div>
-            <div class="col">
-                <!-- <label>Start:</label> -->
-                <input class="form-control" type="text" name="forward[startF]" placeholder="Required" required>
-            </div>
-            <div class="col">
-                <!-- <label>End:</label> -->
-                <input class="form-control" type="text" name="forward[end]" placeholder="Required" required>
-            </div>
-        </div>
-    </div>
-    <div id="reverseTemplate" hidden>
-        <div class="form-group form-row">
-            <div class="col">
-                <!-- <label>Start:</label> -->
-                <input class="form-control" type="text" name="reverse[start]" placeholder="Required" required>
-            </div>
-            <div class="col">
-                <!-- <label>Stop:</label> -->
-                <input class="form-control" type="text" name="reverse[stop]" placeholder="Required" required>
-            </div>
-            <div class="col">
-                <!-- <label>Loads:</label> -->
-                <input class="form-control" type="text" name="reverse[loads]" placeholder="Required" required>
-            </div>
-            <div class="col">
-                <!-- <label>Speed:</label> -->
-                <input class="form-control" type="text" name="reverse[speed]" placeholder="Required" required>
-            </div>
-            <div class="col">
-                <!-- <label>Start:</label> -->
-                <input class="form-control" type="text" name="reverse[startF]" placeholder="Required" required>
-            </div>
-            <div class="col">
-                <!-- <label>End:</label> -->
-                <input class="form-control" type="text" name="reverse[end]" placeholder="Required" required>
-            </div>
         </div>
     </div>
 
