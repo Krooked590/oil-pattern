@@ -14,6 +14,10 @@
 </head>
 
 <body>
+    <!-- <form method="POST" action="/pattern/delete?_method=DELETE" id="deleteForm" hidden>
+        <input type="hidden" name="patternId" id="patternId" value="<%= pattern.id %>">
+    </form> -->
+
     <div class="container">
         <div style="margin: 40px auto">
             <form id="createForm" method="POST" action="/pattern?_method=PUT">
@@ -28,6 +32,9 @@
                         <input class="form-control" type="text" id="oilPerBoard" name="pattern[oilPerBoard]"
                             placeholder="Required" value="<%= pattern.oilPerBoard %>" required>
                     </div>
+                    <!-- <div class="col-1">
+                        <button form="deleteForm" class="btn btn-danger">Delete</button>
+                    </div> -->
                 </div>
                 <div class="row">
                     <div class="col">
@@ -41,36 +48,57 @@
                 <div id="forwardPass">
                     <% for (var p = 0; p < pattern.forward.length; p++) { %>
                     <div class="form-group form-row">
+                        <div class="col"></div>
                         <div class="col">
+                            <% if(p == 0) { %>
                             <label>Start:</label>
+                            <% } %>
                             <input class="form-control" type="text" name="forward[start]" placeholder="Required"
                                 value="<%= pattern.forward[p].start %>" required>
                         </div>
                         <div class="col">
+                            <% if(p == 0) { %>
                             <label>Stop:</label>
+                            <% } %>
                             <input class="form-control" type="text" name="forward[stop]" placeholder="Required"
                                 value="<%= pattern.forward[p].stop %>" required>
                         </div>
                         <div class="col">
+                            <% if(p == 0) { %>
                             <label>Loads:</label>
+                            <% } %>
                             <input class="form-control" type="text" name="forward[loads]" placeholder="Required"
                                 value="<%= pattern.forward[p].loads %>" required>
                         </div>
                         <div class="col">
+                            <% if(p == 0) { %>
                             <label>Speed:</label>
+                            <% } %>
                             <input class="form-control" type="text" name="forward[speed]" placeholder="Required"
                                 value="<%= pattern.forward[p].speed %>" required>
                         </div>
                         <div class="col">
+                            <% if(p == 0) { %>
                             <label>StartF:</label>
+                            <% } %>
                             <input class="form-control" type="text" name="forward[startF]" placeholder="Required"
                                 value="<%= pattern.forward[p].startf %>" required>
                         </div>
                         <div class="col">
+                            <% if(p == 0) { %>
                             <label>End:</label>
+                            <% } %>
                             <input class="form-control" type="text" name="forward[end]" placeholder="Required"
                                 value="<%= pattern.forward[p].end %>" required>
                         </div>
+                        <% if(p == 0) { %>
+                        <div class="col"></div>
+                        <% } else { %>
+                        <div class="col">
+                            <button type="button" class="btn btn-danger"
+                                onclick="deleteRow($(this).parent());">X</button>
+                        </div>
+                        <% } %>
                     </div>
                     <% } %>
                 </div>
@@ -87,42 +115,128 @@
                 <div id="reversePass">
                     <% for (var p = 0; p < pattern.reverse.length; p++) { %>
                     <div class="form-group form-row">
+                        <div class="col"></div>
                         <div class="col">
+                            <% if(p == 0) { %>
                             <label>Start:</label>
+                            <% } %>
                             <input class="form-control" type="text" name="reverse[start]" placeholder="Required"
                                 value="<%= pattern.reverse[p].start %>" required>
                         </div>
                         <div class="col">
+                            <% if(p == 0) { %>
                             <label>Stop:</label>
+                            <% } %>
                             <input class="form-control" type="text" name="reverse[stop]" placeholder="Required"
                                 value="<%= pattern.reverse[p].stop %>" required>
                         </div>
                         <div class="col">
+                            <% if(p == 0) { %>
                             <label>Loads:</label>
+                            <% } %>
                             <input class="form-control" type="text" name="reverse[loads]" placeholder="Required"
-                                 value="<%= pattern.reverse[p].loads %>" required>
+                                value="<%= pattern.reverse[p].loads %>" required>
                         </div>
                         <div class="col">
+                            <% if(p == 0) { %>
                             <label>Speed:</label>
+                            <% } %>
                             <input class="form-control" type="text" name="reverse[speed]" placeholder="Required"
                                 value="<%= pattern.reverse[p].speed %>" required>
                         </div>
                         <div class="col">
+                            <% if(p == 0) { %>
                             <label>StartF:</label>
+                            <% } %>
                             <input class="form-control" type="text" name="reverse[startF]" placeholder="Required"
                                 value="<%= pattern.reverse[p].startf %>" required>
                         </div>
                         <div class="col">
+                            <% if(p == 0) { %>
                             <label>End:</label>
-                            <input class="form-control" type="text" name="reverse[end]" placeholder="Required" 
-                            value="<%= pattern.reverse[p].end %>" required>
+                            <% } %>
+                            <input class="form-control" type="text" name="reverse[end]" placeholder="Required"
+                                value="<%= pattern.reverse[p].end %>" required>
                         </div>
+                        <% if(p == 0) { %>
+                        <div class="col"></div>
+                        <% } else { %>
+                        <div class="col">
+                            <button type="button" class="btn btn-danger"
+                                onclick="deleteRow($(this).parent());">X</button>
+                        </div>
+                        <% } %>
                     </div>
                     <% } %>
                 </div>
-                <input type="hidden" name="pattern[id]" id="patternId" value="<%= pattern.id %>">
                 <button class="btn btn-success">Submit</button>
+                <input type="hidden" name="pattern[id]" id="patternId" value="<%= pattern.id %>">
             </form>
+        </div>
+    </div>
+
+    <div id="forwardTemplate" hidden>
+        <div class="form-group form-row">
+            <div class="col"></div>
+            <div class="col">
+                <!-- <label>Start:</label> -->
+                <input class="form-control" type="text" name="forward[start]" placeholder="Required" required>
+            </div>
+            <div class="col">
+                <!-- <label>Stop:</label> -->
+                <input class="form-control" type="text" name="forward[stop]" placeholder="Required" required>
+            </div>
+            <div class="col">
+                <!-- <label>Loads:</label> -->
+                <input class="form-control" type="text" name="forward[loads]" placeholder="Required" required>
+            </div>
+            <div class="col">
+                <!-- <label>Speed:</label> -->
+                <input class="form-control" type="text" name="forward[speed]" placeholder="Required" required>
+            </div>
+            <div class="col">
+                <!-- <label>Start:</label> -->
+                <input class="form-control" type="text" name="forward[startF]" placeholder="Required" required>
+            </div>
+            <div class="col">
+                <!-- <label>End:</label> -->
+                <input class="form-control" type="text" name="forward[end]" placeholder="Required" required>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-danger" onclick="deleteRow($(this).parent());">X</button>
+            </div>
+        </div>
+    </div>
+    <div id="reverseTemplate" hidden>
+        <div class="form-group form-row">
+            <div class="col"></div>
+            <div class="col">
+                <!-- <label>Start:</label> -->
+                <input class="form-control" type="text" name="reverse[start]" placeholder="Required" required>
+            </div>
+            <div class="col">
+                <!-- <label>Stop:</label> -->
+                <input class="form-control" type="text" name="reverse[stop]" placeholder="Required" required>
+            </div>
+            <div class="col">
+                <!-- <label>Loads:</label> -->
+                <input class="form-control" type="text" name="reverse[loads]" placeholder="Required" required>
+            </div>
+            <div class="col">
+                <!-- <label>Speed:</label> -->
+                <input class="form-control" type="text" name="reverse[speed]" placeholder="Required" required>
+            </div>
+            <div class="col">
+                <!-- <label>Start:</label> -->
+                <input class="form-control" type="text" name="reverse[startF]" placeholder="Required" required>
+            </div>
+            <div class="col">
+                <!-- <label>End:</label> -->
+                <input class="form-control" type="text" name="reverse[end]" placeholder="Required" required>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-danger" onclick="deleteRow($(this).parent());">X</button>
+            </div>
         </div>
     </div>
 
@@ -138,15 +252,17 @@
     <script>
         $().ready(function () {
             $("#forwardPassAdd").click(function () {
-                var t = $("#forwardTemplate").html();
-                $("#forwardPass").append(t);
+                $("#forwardPass").append($("#forwardTemplate").html());
             });
 
             $("#reversePassAdd").click(function () {
-                var t = $("#reverseTemplate").html();
-                $("#reversePass").append(t);
+                $("#reversePass").append($("#reverseTemplate").html());
             });
         });
+
+        function deleteRow($elem) {
+            $elem.parent().remove();
+        }
     </script>
 </body>
 

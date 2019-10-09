@@ -13,11 +13,16 @@ admin.initializeApp({
     databaseURL: process.env.DATABASE_URL
 });
 
-var app = express();
-var port = process.env.PORT || 3000;
-var db = admin.firestore();
-var col = db.collection('patterns');
+const app = express();
+const port = process.env.PORT || 3000;
+const db = admin.firestore();
+const col = db.collection('patterns');
 var pattern = Pattern.playersHouseShot();
+
+var name;
+var oilPerBoard;
+var forward = [];
+var reverse = [];
 
 app.set("view engine", "ejs");
 app.use(bodyParser.json());
@@ -119,41 +124,7 @@ app.post('/pattern/select', (req, res) => {
 });
 
 app.post('/pattern', (req, res) => {
-    let name = req.body.pattern.name;
-    let oilPerBoard = req.body.pattern.oilPerBoard;
-    let forward = [];
-    let reverse = [];
-
-    //forward
-    for (var i = 0; i < req.body.forward.start.length; i++) {
-        forward.push({
-            "start": req.body.forward.start[i],
-            "stop": req.body.forward.stop[i],
-            "loads": req.body.forward.loads[i],
-            "speed": req.body.forward.speed[i],
-            "startf": req.body.forward.startF[i],
-            "end": req.body.forward.end[i]
-        });
-    }
-
-    //reverse
-    for (var i = 0; i < req.body.reverse.start.length; i++) {
-        reverse.push({
-            "start": req.body.reverse.start[i],
-            "stop": req.body.reverse.stop[i],
-            "loads": req.body.reverse.loads[i],
-            "speed": req.body.reverse.speed[i],
-            "startf": req.body.reverse.startF[i],
-            "end": req.body.reverse.end[i]
-        });
-    }
-
-    let nPattern = new Pattern();
-    nPattern.name = name;
-    nPattern.oilPerBoard = oilPerBoard;
-    nPattern.forward = forward;
-    nPattern.reverse = reverse;
-
+    patternFromBody(req.body);
     //add pattern to database
     let docRef = col.doc();
     forward = JSON.stringify(forward);
@@ -166,8 +137,7 @@ app.post('/pattern', (req, res) => {
         reverse: reverse
     }).then(doc => { 
         console.log('done');
-        pattern = nPattern;
-        res.redirect('/pattern');
+        res.redirect('/pattern/select');
     }).catch(err => { 
         console.log('error saving pattern');
         res.send('error saving pattern');
@@ -176,62 +146,67 @@ app.post('/pattern', (req, res) => {
 
 app.put('/pattern', (req, res) => {
     // res.send("200 - ok");
-    let name = req.body.pattern.name;
-    let oilPerBoard = req.body.pattern.oilPerBoard;
-    let forward = [];
-    let reverse = [];
-
-    //forward
-    for (var i = 0; i < req.body.forward.start.length; i++) {
-        forward.push({
-            "start": req.body.forward.start[i],
-            "stop": req.body.forward.stop[i],
-            "loads": req.body.forward.loads[i],
-            "speed": req.body.forward.speed[i],
-            "startf": req.body.forward.startF[i],
-            "end": req.body.forward.end[i]
-        });
-    }
-
-    //reverse
-    for (var i = 0; i < req.body.reverse.start.length; i++) {
-        reverse.push({
-            "start": req.body.reverse.start[i],
-            "stop": req.body.reverse.stop[i],
-            "loads": req.body.reverse.loads[i],
-            "speed": req.body.reverse.speed[i],
-            "startf": req.body.reverse.startF[i],
-            "end": req.body.reverse.end[i]
-        });
-    }
-
-    let nPattern = new Pattern();
-    nPattern.id = req.body.pattern.id;
-    nPattern.name = name;
-    nPattern.oilPerBoard = oilPerBoard;
-    nPattern.forward = forward;
-    nPattern.reverse = reverse;
-    
+    patternFromBody(req.body);
     //add pattern to database
-    let docRef = col.doc(nPattern.id);
+    let docRef = col.doc(req.body.pattern.id);
     forward = JSON.stringify(forward);
     reverse = JSON.stringify(reverse);
     docRef.set({
-        id: nPattern.id,
+        id: docRef.id,
         name: name,
         oilPerBoard: oilPerBoard,
         forward: forward,
         reverse: reverse
     }).then(doc => {
         console.log('done');
-        pattern = nPattern;
-        res.redirect('/pattern');
+        res.redirect('/pattern/select');
     }).catch(err => {
         console.log('error saving pattern');
         res.send('error saving pattern');
     });
 });
 
+app.delete('/pattern/:id', (req, res) => { 
+    var id = req.body.patternId;
+    console.log(id);
+    col.doc(id).delete();
+    // res.send("200 - ok");
+    res.redirect('/pattern');
+});
+
+/*****************************************************/
+
 app.listen(port, () => {
     console.log("starting server on port " + port + "...");
 });
+
+function patternFromBody(body) {
+    name = body.pattern.name;
+    oilPerBoard = body.pattern.oilPerBoard;
+    forward = [];
+    reverse = [];
+
+    //forward
+    for (var i = 0; i < body.forward.start.length; i++) {
+        forward.push({
+            "start": body.forward.start[i],
+            "stop": body.forward.stop[i],
+            "loads": body.forward.loads[i],
+            "speed": body.forward.speed[i],
+            "startf": body.forward.startF[i],
+            "end": body.forward.end[i]
+        });
+    }
+
+    //reverse
+    for (var i = 0; i < body.reverse.start.length; i++) {
+        reverse.push({
+            "start": body.reverse.start[i],
+            "stop": body.reverse.stop[i],
+            "loads": body.reverse.loads[i],
+            "speed": body.reverse.speed[i],
+            "startf": body.reverse.startF[i],
+            "end": body.reverse.end[i]
+        });
+    }
+}
